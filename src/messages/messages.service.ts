@@ -34,4 +34,8 @@ export class MessagesService {
     this.clientToUser[clientId] = name
     Object.values(this.clientToUser)
   }
+
+  getClientName(clientId: string) {
+    return this.clientToUser[clientId]
+  }
 }
