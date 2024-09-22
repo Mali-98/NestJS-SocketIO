@@ -6,6 +6,7 @@ import { Message } from './entities/message.entity';
 @Injectable()
 export class MessagesService {
   messages: Message[] = [{ name: 'Hamada', text: 'Hello' }]
+  clientToUser = {}
   create(createMessageDto: CreateMessageDto) {
     const message = { ...createMessageDto };
     this.messages.push(message);
@@ -27,5 +28,9 @@ export class MessagesService {
 
   remove(id: number) {
     return `This action removes a #${id} message`;
+  }
+
+  identify(name: string, clientId: string) {
+    this.clientToUser[clientId] = name
   }
 }
