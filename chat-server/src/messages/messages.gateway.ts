@@ -16,8 +16,8 @@ export class MessagesGateway {
   constructor(private readonly messagesService: MessagesService) { }
 
   @SubscribeMessage('createMessage') //create a message
-  async create(@MessageBody() createMessageDto: CreateMessageDto) {
-    const message = await this.messagesService.create(createMessageDto)
+  async create(@MessageBody() createMessageDto: CreateMessageDto, @ConnectedSocket() client: Socket) {
+    const message = await this.messagesService.create(createMessageDto, client.id)
 
     this.server.emit('message', message);
 
@@ -49,8 +49,10 @@ export class MessagesGateway {
     @MessageBody('name') name: string,
     @ConnectedSocket() client: Socket,
   ) {
-    return this.messagesService.identify(name, client.id);
+    this.messagesService.identify(name, client.id);
+    client.emit('joined', { success: true });
   }
+
 
   @SubscribeMessage('typing') //To know if user is typing or not
   async typing(@MessageBody('isTyping') isTyping: boolean, @ConnectedSocket() client: Socket,

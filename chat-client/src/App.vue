@@ -30,10 +30,16 @@ onBeforeMount(() => {
 })
 
 const join = () => {
-  socket.emit('join', { name: name.value }, () => {
-    joined.value = true
-  })
-}
+  socket.emit('join', { name: name.value });
+
+  // Listen for the success response after joining
+  socket.on('joined', ({ success }) => {
+    if (success) {
+      joined.value = true;
+    }
+  });
+};
+
 
 const sendMessage = () => {
   socket.emit('createMessage', { text: messageText.value }, () => { messageText.value = '' })

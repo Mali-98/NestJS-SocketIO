@@ -7,8 +7,12 @@ import { Message } from './entities/message.entity';
 export class MessagesService {
   messages: Message[] = []
   clientToUser = {}
-  create(createMessageDto: CreateMessageDto) {
-    const message = { ...createMessageDto };
+  create(createMessageDto: CreateMessageDto, clientId: string) {
+    const message =
+    {
+      name: this.clientToUser[clientId],
+      text: createMessageDto.text
+    };
     this.messages.push(message);
 
     return message;
@@ -31,9 +35,10 @@ export class MessagesService {
   }
 
   identify(name: string, clientId: string) {
-    this.clientToUser[clientId] = name
-    Object.values(this.clientToUser)
+    this.clientToUser[clientId] = name;
+    return this.clientToUser;  // Optional: Return the updated clientToUser object if needed
   }
+
 
   getClientName(clientId: string) {
     return this.clientToUser[clientId]
