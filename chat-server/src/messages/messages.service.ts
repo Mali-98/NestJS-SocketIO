@@ -5,7 +5,7 @@ import { Message } from './entities/message.entity';
 
 @Injectable()
 export class MessagesService {
-  messages: Message[] = [{ name: 'Hamada', text: 'Hello' }]
+  messages: Message[] = []
   clientToUser = {}
   create(createMessageDto: CreateMessageDto) {
     const message = { ...createMessageDto };
