@@ -32,5 +32,6 @@ export class MessagesService {
 
   identify(name: string, clientId: string) {
     this.clientToUser[clientId] = name
+    return Object.values(this.clientToUser)
   }
 }
