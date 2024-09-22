@@ -12,9 +12,9 @@ export class MessagesService {
     return `This action returns all messages`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} message`;
-  }
+  // findOne(id: number) {
+  //   return `This action returns a #${id} message`;
+  // }
 
   update(id: number, updateMessageDto: UpdateMessageDto) {
     return `This action updates a #${id} message`;
