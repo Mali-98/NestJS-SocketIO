@@ -35,4 +35,14 @@ export class MessagesGateway {
   remove(@MessageBody() id: number) {
     return this.messagesService.remove(id);
   }
+
+  @SubscribeMessage('join')
+  joinRoom() {
+    //TODO
+  }
+
+  @SubscribeMessage('typing')
+  async typing() {
+    //TODO
+  }
 }
